@@ -4,6 +4,7 @@ Port Info & Scanner
 IP information
 
 ## Output
+__Port Scanner__
 ```
 Enter the host to be scanned: google.com
 {
@@ -17,6 +18,7 @@ Enter the host to be scanned: google.com
    "ports":[80,443]
 }
 ```
+__Port Info__
 ```
 {
    "Port":"80",
