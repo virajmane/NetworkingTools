@@ -4,7 +4,7 @@ Port Info & Scanner
 IP information
 
 ## Output
-__Port Scanner__
+__IP Info & Port Scanner__
 ```
 Enter the host to be scanned: google.com
 {
