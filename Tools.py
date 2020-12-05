@@ -43,7 +43,18 @@ for x in range(100):
    
 for worker in range(1, 500):
    q.put(worker)
-   
+  
 q.join()
 result["ports"] = ports_arr
 print(result)
+
+def PortInfo(port_no):
+  url = f"https://www.speedguide.net/port.php?port={port_no}"
+  a = pd.read_html(url)
+  final = {
+  "Port":a[2]["Port(s)"][0],
+  "Protocol":a[2]["Protocol"][0],
+  "Service":a[2]["Service"][0],
+  "Description":a[2]["Details"][0]
+  }
+  return final
