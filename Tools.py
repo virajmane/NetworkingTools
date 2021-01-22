@@ -4,11 +4,24 @@ import threading
 from queue import Queue
 import pandas as pd
 import lxml
+import sys
 
 socket.setdefaulttimeout(0.25)
 print_lock = threading.Lock()
 
 target = input('Enter the host to be scanned: ')
+if "." not in target:
+  url = f"https://www.speedguide.net/port.php?port={target}"
+  a = pd.read_html(url)
+  final = {
+  "Port":a[2]["Port(s)"][0],
+  "Protocol":a[2]["Protocol"][0],
+  "Service":a[2]["Service"][0],
+  "Description":a[2]["Details"][0]
+  }
+  print(final)
+  sys.exit()
+
 t_IP = socket.gethostbyname(target)
 url = f"https://www.speedguide.net/ip/{t_IP}"
 a = pd.read_html(url)
@@ -43,18 +56,7 @@ for x in range(100):
    
 for worker in range(1, 500):
    q.put(worker)
-  
+   
 q.join()
 result["ports"] = ports_arr
 print(result)
-
-def PortInfo(port_no):
-  url = f"https://www.speedguide.net/port.php?port={port_no}"
-  a = pd.read_html(url)
-  final = {
-  "Port":a[2]["Port(s)"][0],
-  "Protocol":a[2]["Protocol"][0],
-  "Service":a[2]["Service"][0],
-  "Description":a[2]["Details"][0]
-  }
-  return final
